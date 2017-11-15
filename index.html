@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <!-- saved from url=(0042)file:///E:/Workspace/WalkAround/index.html -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"></head><body onload="drawFrame();">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"></head>
+<body>
 
 <img id="grass" src="./index_files/Grass.png" width="22" height="22">
 <img id="water" src="./index_files/Water.png" width="22" height="22">
@@ -10,10 +11,24 @@
 <canvas id="myCanvas" width="480" height="360" style="border:1px solid #d3d3d3;">
 Your browser does not support the HTML5 canvas tag.</canvas>
 
+<button onClick="drawFrame()">Try it</button>    
+    
 <script>
+    
+function getLocation(){
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    }
+}
+    
+function showPosition(position){
+    var viewX = position.coords.longitude;
+    var viewY = position.coords.latitude;
+}
+    
 function drawFrame() {
     
-    
+    geolocation();
     
     //PREPARE CANVAS AND IMAGES//
     var c = document.getElementById("myCanvas");
@@ -49,10 +64,9 @@ function drawFrame() {
     //const viewX = 70;
     //const viewY = 800;
     
-    const position = navigator.geolocation.getCurrentPosition();
-    const viewX = position.coords.latitude;
-    const viewY = position.coords.longitude;
-    
+    //const viewX=0;
+    //const viewY=0;
+        
     const dx = viewX*11
     const dy = viewY*11
     
