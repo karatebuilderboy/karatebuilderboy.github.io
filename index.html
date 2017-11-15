@@ -22,8 +22,7 @@ function getLocation(){
 }
     
 function showPosition(position){
-    var viewX = 0;
-    var viewY = 0;
+    console.log("long: " + position.coords.longitude + "lat: " + position.coords.latitude);
     
     viewX = position.coords.longitude;
     viewY = position.coords.latitude;
