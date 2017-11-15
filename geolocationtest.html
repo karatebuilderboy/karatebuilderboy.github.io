@@ -11,7 +11,7 @@
 <canvas id="myCanvas" width="480" height="360" style="border:1px solid #d3d3d3;">
 Your browser does not support the HTML5 canvas tag.</canvas>
 
-<button onClick="drawFrame()">Try it</button>    
+<button onClick="getLocation()">Get Location and Draw Frame</button>    
     
 <script>
     
@@ -24,11 +24,10 @@ function getLocation(){
 function showPosition(position){
     var viewX = position.coords.longitude;
     var viewY = position.coords.latitude;
+    drawFrame();
 }
     
 function drawFrame() {
-    
-    getLocation();
     
     //PREPARE CANVAS AND IMAGES//
     var c = document.getElementById("myCanvas");
