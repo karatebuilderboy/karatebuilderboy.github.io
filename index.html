@@ -22,12 +22,12 @@ function getLocation(){
 }
     
 function showPosition(position){
-    console.log("long: " + position.coords.longitude + ", lat: " + position.coords.latitude);
+    console.log("long: " + position.coords.longitude + "lat: " + position.coords.latitude);
     
     viewX = position.coords.longitude;
     viewY = position.coords.latitude;
     
-    console.log(viewX + " " viewY);
+    console.log(viewX + viewY);
     
     drawFrame();
 }
@@ -71,8 +71,8 @@ function drawFrame() {
     //const viewX=0;
     //const viewY=0;
         
-    const dx = viewX*5500000
-    const dy = viewY*5500000
+    const dx = viewX*11
+    const dy = viewY*11
     
     
     
