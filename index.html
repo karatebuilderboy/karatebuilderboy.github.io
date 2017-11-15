@@ -22,9 +22,14 @@ function getLocation(){
 }
     
 function showPosition(position){
-    var viewX = position.coords.longitude;
-    var viewY = position.coords.latitude;
+    var viewX = 0;
+    var viewY = 0;
+    
+    viewX = position.coords.longitude;
+    viewY = position.coords.latitude;
+    
     console.log(viewX + viewY);
+    
     drawFrame();
 }
     
