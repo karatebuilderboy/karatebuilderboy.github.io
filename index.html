@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html>
@@ -18,9 +19,10 @@
 <canvas id="myCanvas" width="480" height="360" style="border:1px solid #d3d3d3;">
 Your browser does not support the HTML5 canvas tag.</canvas>
 
-<button onClick="getLocation()">Start Demo (Please allow and remember location!)</button>    
+<button>Start Demo (Please allow and remember location!)</button>    
     
 <script>
+console.log("Is this running?");
 
 function getLocation(){
     
@@ -47,7 +49,6 @@ function showPosition(position) {
     
 function drawFrame() {
     
-    //PREPARE CANVAS AND IMAGES//
     var c = document.getElementById("myCanvas");
     var ctx = c.getContext("2d");
            
@@ -55,33 +56,9 @@ function drawFrame() {
     var water = document.getElementById("water");
     var blackMask = document.getElementById("blackMask");
     var whiteMask = document.getElementById("whiteMask");
-    
-    
-    
-    //SET UP WORLD GEN PARAMETERS//
-    const frequency1 = 0.23;
-    const amplitude1 = 34;
-    const offset1 = 269;
-    
-    const frequency2 = 0.84;
-    const amplitude2 = 19;
-    const offset2 = 632
-    
-    const frequency3 = 0.9;
-    const amplitude3 = 12;
-    const offset3 = 436;
-    
-    const frequency4 = 1.88;
-    const amplitude4 = 8;
-    const offset4 = 487;
-        
+            
     const dx = (Math.round(viewX*16666))*11;
     const dy = (Math.round(viewY*16666))*11;
-    
-    
-    
-    
-    //DRAW THE FRAME//
             
     for (tileID = 0; tileID < 3600; tileID++){
         
