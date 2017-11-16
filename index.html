@@ -18,11 +18,15 @@
     
 <canvas id="myCanvas" width="480" height="360" style="border:1px solid #d3d3d3;">
 Your browser does not support the HTML5 canvas tag.</canvas>
-
-<button>Start Demo (Please allow and remember location!)</button>    
-    
+     
 <script>
-console.log("Is this running?");
+setInterval(onTimerTick, 100);
+    
+function onTimerTick() {
+    
+    getLocation();
+    
+}
 
 function getLocation(){
     
