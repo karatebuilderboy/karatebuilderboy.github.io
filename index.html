@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html>
+    
+<head>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    
+</head>
+    
+<body>
+
+<img id="grass" src="./index_files/Grass.png" width="22" height="22">
+<img id="water" src="./index_files/Water.png" width="22" height="22">
+<img id="blackMask" src="./index_files/BlackMask.png" width="22" height="22">
+<img id="whiteMask" src="./index_files/WhiteMask.png" width="22" height="22">
+    
+<canvas id="myCanvas" width="480" height="360" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+     
+<script>
+setInterval(onTimerTick, 500);
+const devMode = 0;
+    
+let dx, dy, viewX, viewY, c = document.getElementById("myCanvas"), ctx = c.getContext("2d"), grass = document.getElementById("grass"), water = document.getElementById("water"), blackMask = document.getElementById("blackMask"), whiteMask = document.getElementById("whiteMask");
+    
+function onTimerTick() {
+    
+    if(devMode === 0){
+        
+        if (navigator.geolocation) {
+            
+            navigator.geolocation.getCurrentPosition(showPosition);
+            
+        } else {
+            console.error("location not accessible")
+        }
+        
+    } else {
+        
+        dx = 0;
+        dy = 11;
+        drawFrame();
+        
+    }
+    
+}
+    
+function showPosition(position) {
+    
+    console.log("long: " + position.coords.longitude + "lat: " + position.coords.latitude);
+    
+    viewX = position.coords.longitude;
+    viewY = position.coords.latitude;
+    
+    console.log(viewX.toString() + viewY.toString());
+    
+    dx = (Math.round(viewX*2000))*11;
+    dy = (Math.round(viewY*2000))*11;
+    
+    drawFrame();
+    
+}
+    
+function drawFrame() {
+                        
+    for (let tileID = 0; tileID < 3600; tileID++) {
+        
+        let XHome = (tileID % 60) * 11  - (Math.floor(tileID / 60)) * 11, YHome = (335 - (Math.floor(tileID / 60)) * 5.5) - (tileID % 60) * 5.5;
+        
+        /*
+        var YOffset = ((Math.round((
+                      (Math.sin((dx+XHome)*0.025)*20)+
+                      (Math.sin((dy+YHome)*0.025)*20);
+                      )/5.5))*5.0)-25;
+        */
+        
+
+        let YOffset = ((Math.round((
+                      (Math.sin((dx+XHome+000)*0.01)*20)+
+                      (Math.cos((dy+YHome+000)*0.01)*20)+
+                      (Math.sin((dx+XHome+100)*0.02)*15)+
+                      (Math.cos((dy+YHome+100)*0.025)*15)+
+                      (Math.sin((dx+XHome+000)*0.040)*3.5)+
+                      (Math.cos((dy+YHome+000)*0.040)*3.5)+
+                      (Math.sin((dx+XHome+350)*0.050)*3)+
+                      (Math.cos((dy+YHome+350)*0.050)*3)+
+                      (Math.sin((dx+XHome+030)*0.075)*2)+
+                      (Math.cos((dy+YHome+025)*0.070)*2)+
+                      (Math.sin((dx+XHome+100)*0.085)*1.5)+
+                      (Math.cos((dy+YHome+330)*0.080)*1.5)+
+                      (Math.sin((dy+dx+XHome+YHome)*0.040)*3)+
+                      (Math.cos((dy-dx-XHome+YHome+330)*0.030)*3)+
+                      (Math.sin((dx-dy+XHome-YHome+880)*0.035)*3)+
+                      (Math.cos((dx-dy+XHome+YHome+44)*0.025)*4)
+                      )/5.5))*5.5)-25;
+
+        
+        let YPos = YHome + YOffset, XPos = XHome;
+        
+        if (YOffset<-35) {
+            
+            let XRender = XPos + 240, YRender = -1 * ( YHome -36) + 180;
+            
+            ctx.drawImage(water,XRender,YRender);
+            
+            for (n = 0; n < -(YOffset/7)-3; n=n+0.5) {
+                
+                ctx.drawImage(blackMask,XRender,YRender);
+                
+            }
+                        
+        } else {
+            
+            let XRender = XPos + 240, YRender = 180 - YPos;
+            
+            ctx.drawImage(grass,XRender,YRender);
+            
+            for (let n = 0; n < (YOffset/10); n+=0.2) {
+                
+                ctx.drawImage(whiteMask,XRender,YRender);
+                
+            }
+            for (let n = 0; n < -(YOffset/12); n+=0.2) {
+                
+                ctx.drawImage(blackMask,XRender,YRender);
+                
+            }
+                        
+        }
+        
+    }
+        
+}
+
+</script>
+
+</body>
+
+</html>
