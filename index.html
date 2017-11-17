@@ -81,12 +81,14 @@ function drawFrame() {
         var XHome = (tileID % 60) * 11  - (Math.floor(tileID / 60)) * 11;
         var YHome = (335 - (Math.floor(tileID / 60)) * 5.5) - (tileID % 60) * 5.5;
         
-        var YOffset = //((Math.round((
+        /*
+        var YOffset = ((Math.round((
                       (Math.sin((dx+XHome)*0.025)*20)+
                       (Math.sin((dy+YHome)*0.025)*20);
-                      //)/5.5))*5.0)-25;
+                      )/5.5))*5.0)-25;
+        */
         
-        /*
+
         var YOffset = ((Math.round((
                       (Math.sin((dx+XHome+000)*0.01)*20)+
                       (Math.cos((dy+YHome+000)*0.01)*20)+
@@ -105,7 +107,7 @@ function drawFrame() {
                       (Math.sin((dx-dy+XHome-YHome+880)*0.035)*3)+
                       (Math.cos((dx-dy+XHome+YHome+44)*0.025)*4)
                       )/5.5))*5.0)-25;
-        */
+
         
         var YPos = YHome + YOffset;
         var XPos = XHome;
