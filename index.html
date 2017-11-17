@@ -59,8 +59,8 @@ function showPosition(position) {
     
     console.log(viewX + viewY);
     
-    dx = (Math.round(viewX*2000));
-    dy = (Math.round(viewY*2000));
+    dx = (Math.round(viewX*2000))*11;
+    dy = (Math.round(viewY*2000))*11;
     drawFrame();
     
 }
@@ -82,7 +82,7 @@ function drawFrame() {
         
         var YOffset = ((Math.round((
                       (Math.sin((dx+XHome)*0.025)*20)+
-                      (Math.cos((dy+YHome)*0.025)*20)
+                      (Math.sin((dy+YHome)*0.025)*20)
                       )/5.5))*5.0)-25;
         
         /*
