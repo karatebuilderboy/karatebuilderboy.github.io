@@ -21,7 +21,7 @@ Your browser does not support the HTML5 canvas tag.</canvas>
      
 <script>
 setInterval(onTimerTick, 100);
-const devMode = 0;
+const devMode = 1;
     
 function onTimerTick() {
     
@@ -59,8 +59,9 @@ function showPosition(position) {
     
     console.log(viewX + viewY);
     
-    dx = (Math.round(viewX*2000))*5.5;
+    dx = (Math.round(viewX*2000))*11;
     dy = (Math.round(viewY*2000))*11;
+    
     drawFrame();
     
 }
@@ -80,10 +81,10 @@ function drawFrame() {
         var XHome = (tileID % 60) * 11  - (Math.floor(tileID / 60)) * 11;
         var YHome = (335 - (Math.floor(tileID / 60)) * 5.5) - (tileID % 60) * 5.5;
         
-        var YOffset = ((Math.round((
+        var YOffset = //((Math.round((
                       (Math.sin((dx+XHome)*0.025)*20)+
-                      (Math.sin((dy+YHome)*0.025)*20)
-                      )/5.5))*5.0)-25;
+                      (Math.sin((dy+YHome)*0.025)*20);
+                      //)/5.5))*5.0)-25;
         
         /*
         var YOffset = ((Math.round((
@@ -112,7 +113,7 @@ function drawFrame() {
         if (YOffset<-35) {
             
             var XRender = XPos + 240;
-            var YRender = -1 * ( YPos - YOffset - 16) + 180;
+            var YRender = -1 * ( YPos - YOffset -36) + 180;
             
             ctx.drawImage(water,XRender,YRender);
             
@@ -125,7 +126,7 @@ function drawFrame() {
         } else {
             
             var XRender = XPos + 240;
-            var YRender = -1 * YPos + 160;
+            var YRender = -1 * YPos + 180;
             
             ctx.drawImage(grass,XRender,YRender);
             
