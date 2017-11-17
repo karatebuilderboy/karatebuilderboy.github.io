@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html>
@@ -20,10 +21,22 @@ Your browser does not support the HTML5 canvas tag.</canvas>
      
 <script>
 setInterval(onTimerTick, 100);
+const devMode = 0;
     
 function onTimerTick() {
     
-    getLocation();
+    if(devMode == 0){
+        
+        getLocation();
+        
+    } else {
+        
+        dx = 0;
+        dy = 11;
+        drawFrame();
+        
+    }
+    
     
 }
 
@@ -46,6 +59,8 @@ function showPosition(position) {
     
     console.log(viewX + viewY);
     
+    const dx = (Math.round(viewX*20000))*11;
+    const dy = 0;
     drawFrame();
     
 }
@@ -59,16 +74,18 @@ function drawFrame() {
     var water = document.getElementById("water");
     var blackMask = document.getElementById("blackMask");
     var whiteMask = document.getElementById("whiteMask");
-            
-    const dx = (Math.round(viewX*16666))*11;
-    const dy = (Math.round(viewY*16666))*11;
-            
+                        
     for (tileID = 0; tileID < 3600; tileID++){
         
         var XHome = (tileID % 60) * 11  - (Math.floor(tileID / 60)) * 11;
         var YHome = (335 - (Math.floor(tileID / 60)) * 5.5) - (tileID % 60) * 5.5;
         
+        var YOffset = ((Math.round((
+                      (Math.sin((dx+XHome)*0.025)*20)+
+                      (Math.cos((dy+YHome)*0.025)*20)
+                      )/5.5))*5.0)-25;
         
+        /*
         var YOffset = ((Math.round((
                       (Math.sin((dx+XHome+000)*0.01)*20)+
                       (Math.cos((dy+YHome+000)*0.01)*20)+
@@ -87,7 +104,7 @@ function drawFrame() {
                       (Math.sin((dx-dy+XHome-YHome+880)*0.035)*3)+
                       (Math.cos((dx-dy+XHome+YHome+44)*0.025)*4)
                       )/5.5))*5.0)-25;
-        
+        */
         
         var YPos = YHome + YOffset;
         var XPos = XHome;
