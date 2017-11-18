@@ -1,140 +1,293 @@
 <!DOCTYPE html>
-
 <html>
-    
-<head>
-    
-    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-    
-</head>
-    
-<body>
-
-<img id="grass" src="./index_files/Grass.png" width="22" height="22">
-<img id="water" src="./index_files/Water.png" width="22" height="22">
-<img id="blackMask" src="./index_files/BlackMask.png" width="22" height="22">
-<img id="whiteMask" src="./index_files/WhiteMask.png" width="22" height="22">
-    
-<canvas id="myCanvas" width="480" height="360" style="border:1px solid #d3d3d3;">
-Your browser does not support the HTML5 canvas tag.</canvas>
-     
-<script>
-setInterval(onTimerTick, 500);
-const devMode = 0;
-    
-let dx, dy, viewX, viewY, c = document.getElementById("myCanvas"), ctx = c.getContext("2d"), grass = document.getElementById("grass"), water = document.getElementById("water"), blackMask = document.getElementById("blackMask"), whiteMask = document.getElementById("whiteMask");
-    
-function onTimerTick() {
-    
-    if(devMode === 0){
-        
-        if (navigator.geolocation) {
-            
-            navigator.geolocation.getCurrentPosition(showPosition);
-            
-        } else {
-            console.error("location not accessible")
+    <head>
+        <title>Online Spoon Trading</title>
+        <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <style type="text/css">
+        .scanner-laser{
+            position: absolute;
+            margin: 40px;
+            height: 30px;
+            width: 30px;
         }
-        
-    } else {
-        
-        dx = 0;
-        dy = 11;
-        drawFrame();
-        
-    }
-    
-}
-    
-function showPosition(position) {
-    
-    console.log("long: " + position.coords.longitude + "lat: " + position.coords.latitude);
-    
-    viewX = position.coords.longitude;
-    viewY = position.coords.latitude;
-    
-    console.log(viewX.toString() + viewY.toString());
-    
-    dx = (Math.round(viewX*2000))*11;
-    dy = (Math.round(viewY*2000))*11;
-    
-    drawFrame();
-    
-}
-    
-function drawFrame() {
-                        
-    for (let tileID = 0; tileID < 3600; tileID++) {
-        
-        let XHome = (tileID % 60) * 11  - (Math.floor(tileID / 60)) * 11, YHome = (335 - (Math.floor(tileID / 60)) * 5.5) - (tileID % 60) * 5.5;
-        
-        /*
-        var YOffset = ((Math.round((
-                      (Math.sin((dx+XHome)*0.025)*20)+
-                      (Math.sin((dy+YHome)*0.025)*20);
-                      )/5.5))*5.0)-25;
-        */
-        
-
-        let YOffset = ((Math.round((
-                      (Math.sin((dx+XHome+000)*0.01)*20)+
-                      (Math.cos((dy+YHome+000)*0.01)*20)+
-                      (Math.sin((dx+XHome+100)*0.02)*15)+
-                      (Math.cos((dy+YHome+100)*0.025)*15)+
-                      (Math.sin((dx+XHome+000)*0.040)*3.5)+
-                      (Math.cos((dy+YHome+000)*0.040)*3.5)+
-                      (Math.sin((dx+XHome+350)*0.050)*3)+
-                      (Math.cos((dy+YHome+350)*0.050)*3)+
-                      (Math.sin((dx+XHome+030)*0.075)*2)+
-                      (Math.cos((dy+YHome+025)*0.070)*2)+
-                      (Math.sin((dx+XHome+100)*0.085)*1.5)+
-                      (Math.cos((dy+YHome+330)*0.080)*1.5)+
-                      (Math.sin((dy+dx+XHome+YHome)*0.040)*3)+
-                      (Math.cos((dy-dx-XHome+YHome+330)*0.030)*3)+
-                      (Math.sin((dx-dy+XHome-YHome+880)*0.035)*3)+
-                      (Math.cos((dx-dy+XHome+YHome+44)*0.025)*4)
-                      )/5.5))*5.5)-25;
-
-        
-        let YPos = YHome + YOffset, XPos = XHome;
-        
-        if (YOffset<-35) {
-            
-            let XRender = XPos + 240, YRender = -1 * ( YHome -36) + 180;
-            
-            ctx.drawImage(water,XRender,YRender);
-            
-            for (n = 0; n < -(YOffset/7)-3; n=n+0.5) {
-                
-                ctx.drawImage(blackMask,XRender,YRender);
-                
-            }
-                        
-        } else {
-            
-            let XRender = XPos + 240, YRender = 180 - YPos;
-            
-            ctx.drawImage(grass,XRender,YRender);
-            
-            for (let n = 0; n < (YOffset/10); n+=0.2) {
-                
-                ctx.drawImage(whiteMask,XRender,YRender);
-                
-            }
-            for (let n = 0; n < -(YOffset/12); n+=0.2) {
-                
-                ctx.drawImage(blackMask,XRender,YRender);
-                
-            }
-                        
+        .laser-leftTop{
+            top: 0;
+            left: 0;
+            border-top: solid red 5px;
+            border-left: solid red 5px;
         }
-        
-    }
-        
-}
-
-</script>
-
+        .laser-leftBottom{
+            bottom: 0;
+            left: 0;
+            border-bottom: solid red 5px;
+            border-left: solid red 5px;
+        }
+        .laser-rightTop{
+            top: 0;
+            right: 0;
+            border-top: solid red 5px;
+            border-right: solid red 5px;
+        }
+        .laser-rightBottom{
+            bottom: 0;
+            right: 0;
+            border-bottom: solid red 5px;
+            border-right: solid red 5px;
+        }
+        </style>
+    </head>
+    <body>       
+        <div class="page-header">
+            <h1 style="margin-left:10px;">Online Spoon Trading<br>
+            <small>Hybrid physical-digital currency with value justified by plastic spoons
+            </small>
+	    <br>
+	    <small> By Peter			    
+	    </small>
+            </h1>
+        </div>
+        <div id="QR-Code" class="container" style="width:100%">
+            <div class="panel panel-primary">
+                <div class="panel-heading" style="display: inline-block;width: 100%;">
+                    <h4 style="width:50%;float:left;">Spoon Wallet</h4>
+                    <div style="width:50%;float:right;margin-top: 5px;margin-bottom: 5px;text-align: right;">
+                    <select id="cameraId" class="form-control" style="display: inline-block;width: auto;"></select>
+                    <button id="save" data-toggle="tooltip" title="Image shoot" type="button" class="btn btn-info btn-sm disabled"><span class="glyphicon glyphicon-picture"></span></button>
+                    <button id="play" data-toggle="tooltip" title="Play" type="button" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-play"></span></button>
+                    <button id="stop" data-toggle="tooltip" title="Stop" type="button" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-stop"></span></button>
+                    <button id="stopAll" data-toggle="tooltip" title="Stop streams" type="button" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-stop"></span></button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-6" style="text-align: center;">
+                    <div class="well" style="position: relative;display: inline-block;">
+                        <canvas id="qr-canvas" width="320" height="240"></canvas>
+                        <div class="scanner-laser laser-rightBottom" style="opacity: 0.5;"></div>
+                        <div class="scanner-laser laser-rightTop" style="opacity: 0.5;"></div>
+                        <div class="scanner-laser laser-leftBottom" style="opacity: 0.5;"></div>
+                        <div class="scanner-laser laser-leftTop" style="opacity: 0.5;"></div>
+                    </div>
+                </div>
+		<br>    
+                <div class="col-md-6" style="text-align: center;">
+                    <div id="result" class="thumbnail">
+                        <div class="caption">
+                            <h3>User Details</h3>
+                            <input type="password" id="usrPsw" value="noInput">
+                            <button onclick="checkPass()">Check Password</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+            </div>
+        </div>
+    </div>
 </body>
-
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/qrcodelib.js"></script>
+<script type="text/javascript" src="js/WebCodeCam.js"></script>
+	
+	
+	
+	
+	
+<!-- Main QR Scanning Script -->
+    <script>
+    var code = "Unscanned";
+    var passwordValue = "noInput";
+    
+    var decoder = $('#qr-canvas'),
+		sl = $('.scanner-laser'),
+		pl = $('#play'),
+		si = $('#scanned-img'),
+		sv = $('#save'),
+		sp = $('#stop'),
+		spAll = $('#stopAll'),
+		co = $('#contrast'),
+		cov = $('#contrast-value'),
+		zo = $('#zoom'),
+		zov = $('#zoom-value'),
+		br = $('#brightness'),
+		brv = $('#brightness-value'),
+		tr = $('#threshold'),
+		trv = $('#threshold-value'),
+		sh = $('#sharpness'),
+		shv = $('#sharpness-value'),
+		gr = $('#grayscale'),
+		grv = $('#grayscale-value');
+		$('[data-toggle="tooltip"]').tooltip();
+	    
+    (function(window) {
+	'use strict';
+	
+	 //OLD DECODER SPOT   
+	    
+	sl.css('opacity', .5);
+	pl.click(function() {
+		if (typeof decoder.data().plugin_WebCodeCam == "undefined") {
+			decoder.WebCodeCam({
+				videoSource: {
+					id: $('select#cameraId').val(),
+					maxWidth: 640,
+					maxHeight: 480
+				},
+				autoBrightnessValue: 120,
+				resultFunction: function(text, imgSrc) {
+					si.attr('src', imgSrc);
+					
+					
+					
+					
+					
+					//SPOON STUFF
+					var QR = text;
+					code = QR.split(" ");
+					console.log(code);
+					console.log(code[0]);
+					if (code[0] == "usr") {
+						console.log("It's a user card!");
+					} else if (code[0] == "spoon") {
+						console.log("It's a spoon!");
+					} else {
+						console.log("It's unrecognized!");
+					}
+					
+					
+					
+					
+					
+					sl.fadeOut(150, function() {
+						sl.fadeIn(150);
+					});
+				},
+				getUserMediaError: function() {
+					alert('Sorry, the browser you are using doesn\'t support getUserMedia');
+				},
+				cameraError: function(error) {
+					var p, message = 'Error detected with the following parameters:\n';
+					for (p in error) {
+						message += p + ': ' + error[p] + '\n';
+					}
+					alert(message);
+				}
+			});
+			sv.removeClass('disabled');
+			sp.click(function(event) {
+				sv.addClass('disabled');
+				decoder.data().plugin_WebCodeCam.cameraStop();
+			});
+			spAll.click(function(event) {
+				sv.addClass('disabled');
+				decoder.data().plugin_WebCodeCam.cameraStopAll();
+			});
+		} else {
+			sv.removeClass('disabled');
+			decoder.data().plugin_WebCodeCam.cameraPlay();
+		}
+	});
+	sv.click(function() {
+		if (typeof decoder.data().plugin_WebCodeCam == "undefined") return;
+		var src = decoder.data().plugin_WebCodeCam.getLastImageSrc();
+		si.attr('src', src);
+	});
+	Page.changeZoom = function(a) {
+		if (typeof decoder.data().plugin_WebCodeCam == "undefined") return;
+		var value = typeof a != 'undefined' ? parseFloat(a.toPrecision(2)) : zo.val() / 10;
+		zov.text(zov.text().split(':')[0] + ': ' + value.toString());
+		decoder.data().plugin_WebCodeCam.options.zoom = parseFloat(value);
+		if (typeof a != 'undefined') zo.val(a * 10);
+	}
+	Page.changeContrast = function() {
+		if (typeof decoder.data().plugin_WebCodeCam == "undefined") return;
+		var value = co.val();
+		cov.text(cov.text().split(':')[0] + ': ' + value.toString());
+		decoder.data().plugin_WebCodeCam.options.contrast = parseFloat(value);
+	}
+	Page.changeBrightness = function() {
+		if (typeof decoder.data().plugin_WebCodeCam == "undefined") return;
+		var value = br.val();
+		brv.text(brv.text().split(':')[0] + ': ' + value.toString());
+		decoder.data().plugin_WebCodeCam.options.brightness = parseFloat(value);
+	}
+	Page.changeThreshold = function() {
+		if (typeof decoder.data().plugin_WebCodeCam == "undefined") return;
+		var value = tr.val();
+		trv.text(trv.text().split(':')[0] + ': ' + value.toString());
+		decoder.data().plugin_WebCodeCam.options.threshold = parseFloat(value);
+	}
+	Page.changeSharpness = function() {
+		if (typeof decoder.data().plugin_WebCodeCam == "undefined") return;
+		var value = sh.prop('checked');
+		if (value) {
+			shv.text(shv.text().split(':')[0] + ': on');
+			decoder.data().plugin_WebCodeCam.options.sharpness = [0, -1, 0, -1, 5, -1, 0, -1, 0];
+		} else {
+			shv.text(shv.text().split(':')[0] + ': off');
+			decoder.data().plugin_WebCodeCam.options.sharpness = [];
+		}
+	}
+	Page.changeGrayscale = function() {
+		if (typeof decoder.data().plugin_WebCodeCam == "undefined") return;
+		var value = gr.prop('checked');
+		if (value) {
+			grv.text(grv.text().split(':')[0] + ': on');
+			decoder.data().plugin_WebCodeCam.options.grayScale = true;
+		} else {
+			grv.text(grv.text().split(':')[0] + ': off');
+			decoder.data().plugin_WebCodeCam.options.grayScale = false;
+		}
+	}
+	var getZomm = setInterval(function() {
+		var a;
+		try {
+			a = decoder.data().plugin_WebCodeCam.optimalZoom();
+		} catch (e) {
+			a = 0;
+		}
+		if (a != 0) {
+			Page.changeZoom(a);
+			clearInterval(getZomm);
+		}
+	}, 500);
+	function gotSources(sourceInfos) {
+		for (var i = 0; i !== sourceInfos.length; ++i) {
+			var sourceInfo = sourceInfos[i];
+			var option = document.createElement('option');
+			option.value = sourceInfo.id;
+			if (sourceInfo.kind === 'video') {
+				var face = sourceInfo.facing == '' ? 'unknown' : sourceInfo.facing;
+				option.text = sourceInfo.label || 'camera ' + (videoSelect.length + 1) + ' (facing: ' + face + ')';
+				videoSelect.appendChild(option);
+			}
+		}
+	}
+	    		
+	if (typeof MediaStreamTrack.getSources !== 'undefined') {
+		var videoSelect = document.querySelector('select#cameraId');
+		$(videoSelect).change(function(event) {
+			if (typeof decoder.data().plugin_WebCodeCam !== "undefined") {
+				decoder.data().plugin_WebCodeCam.options.videoSource.id = $(this).val();
+				decoder.data().plugin_WebCodeCam.cameraStop();
+				decoder.data().plugin_WebCodeCam.cameraPlay(false);
+			}
+		});
+		MediaStreamTrack.getSources(gotSources);
+	} else {
+		document.querySelector('select#cameraId').remove();
+	}
+}).call(window.Page = window.Page || {});
+	    
+function checkPass() {
+		passwordValue = document.getElementById("usrPsw").value;
+		console.log(passwordValue);
+		if (code[0] == "usr" && code[1] == passwordValue) {
+		    	console.log("We're in!");
+		    } else {
+		    	console.log("Youn dun goofed!");
+		    }
+	}
+</script>
+    
 </html>
