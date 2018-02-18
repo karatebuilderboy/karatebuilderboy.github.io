@@ -19,7 +19,7 @@
 Your browser does not support the HTML5 canvas tag.</canvas>
      
 <script>
-setInterval(onTimerTick, 500);
+setInterval(onTimerTick, 2000);
 const devMode = 0;
     
 let dx, dy, viewX, viewY, c = document.getElementById("myCanvas"), ctx = c.getContext("2d"), grass = document.getElementById("grass"), water = document.getElementById("water"), blackMask = document.getElementById("blackMask"), whiteMask = document.getElementById("whiteMask");
@@ -48,10 +48,9 @@ function onTimerTick() {
     
 function showPosition(position) {
     
-    console.log("long: " + position.coords.longitude + "lat: " + position.coords.latitude);
-    
-    viewX = position.coords.longitude;
-    viewY = position.coords.latitude;
+    viewX = (position.coords.longitude)/5;
+    viewY = (position.coords.latitude)/5;
+    console.log("x: " + viewX + "y: " + viewY); 
     
     console.log(viewX.toString() + viewY.toString());
     
