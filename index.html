@@ -58,12 +58,12 @@ function showPosition(position) {
     dx = (Math.round(viewX*2000))*11;
     dy = (Math.round(viewY*2000))*11;
                                      
- //   if((viewX != oldViewX) || (viewY != oldViewY)){
+   if((viewX != oldViewX) || (viewY != oldViewY)){
     drawFrame();
-//    oldViewX = viewX;
- //   oldViewY = viewY;
- //   } else { console.log("hey");
- //   }
+   oldViewX = viewX;
+   oldViewY = viewY;
+   } else { console.log("hey");
+   }
     
 }
     
