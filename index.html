@@ -13,6 +13,7 @@
 <img id="grass" src="https://lh3.googleusercontent.com/-Nygm-dDnL-U/Wo4oEOxnj9I/AAAAAAAAHfI/A5CKKdW6R8E02-hyRQCj9lf7asBaGxOIgCL0BGAYYCw/h23/2018-02-21.png" width="22" height="22">
 <img id="blank" src="https://lh3.googleusercontent.com/-KdARkbOh70Y/Wo4InWSwDoI/AAAAAAAAHeQ/zBJOonpYSFI3bM5zYdWhGJ9guxu9Na1pQCL0BGAYYCw/h22/2018-02-21.png" width="22" height="22">
 <img id="house1" src="https://lh3.googleusercontent.com/-ZK4lUoix7_8/Wo4o9E5NM7I/AAAAAAAAHfQ/Ez5r1Z7KpLkg8RbblpLC9tSehBkGlYVXgCL0BGAYYCw/h34/2018-02-21.png" width="22" height="22">
+<img id="house2" src="https://lh3.googleusercontent.com/-O85d993XyhQ/Wo4tyy6m6xI/AAAAAAAAHfo/582YvNvQ1gsNB1hfbS8V0XHMN5aiLkDAQCL0BGAYYCw/h34/2018-02-21.png" width="22" height="22">
 <img id="water" src="./index_files/Water.png" width="22" height="22">
 <img id="blackMask" src="./index_files/BlackMask.png" width="22" height="22">
 <img id="whiteMask" src="./index_files/WhiteMask.png" width="22" height="22">
@@ -118,16 +119,19 @@ function drawFrame() {
             
             let XRender = XPos + 240, YRender = 180 - YPos;
                                      
-            if(Math.round(Math.random() * 2) == 1){
+            if(Math.round(Math.random() * 3) == 1){
             ctx.drawImage(grass,XRender,YRender);                   
             } else {
-            if(Math.round(Math.random() * 1) == 1){
+            if(Math.round(Math.random() * 2) == 1){
             ctx.drawImage(blank,XRender,YRender);
             } else {
+            if(Math.round(Math.random() * 1) == 1){
             ctx.drawImage(house1,XRender,(YRender-5.5)); 
+            } else {
+            ctx.drawImage(house2,XRender,(YRender-5.5)); 
             }
             }
-            
+            }
         
             
             for (let n = 0; n < (YOffset/10); n+=0.2) {
