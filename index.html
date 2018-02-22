@@ -23,7 +23,7 @@ Your browser does not support the HTML5 canvas tag.</canvas>
 setInterval(onTimerTick, 2000);
 const devMode = 0;
     
-let dx, dy, viewX, viewY, c = document.getElementById("myCanvas"), ctx = c.getContext("2d"), grass = document.getElementById("grass"), water = document.getElementById("water"), blackMask = document.getElementById("blackMask"), whiteMask = document.getElementById("whiteMask");
+let dx, dy, viewX, viewY, oldViewX = 0, oldViewY = 0, c = document.getElementById("myCanvas"), ctx = c.getContext("2d"), grass = document.getElementById("grass"), water = document.getElementById("water"), blackMask = document.getElementById("blackMask"), whiteMask = document.getElementById("whiteMask");
     
 function onTimerTick() {
     
@@ -57,8 +57,11 @@ function showPosition(position) {
     
     dx = (Math.round(viewX*2000))*11;
     dy = (Math.round(viewY*2000))*11;
-    
+                                     
+    if((viewX != oldViewX) || (viewY != oldViewY)){
     drawFrame();
+    } else { console.log("hey");
+    }
     
 }
     
