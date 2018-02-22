@@ -20,13 +20,27 @@
     
 <canvas id="myCanvas" width="480" height="360" style="border:1px solid #d3d3d3;">
 Your browser does not support the HTML5 canvas tag.</canvas>
-     
+    
+    <p>Welcome to Peter and David's 1920s game! Walk around in real life and see your location change on the fictional map of a large city in the 20s. As you move around, you will see conversations
+    between people as satirical political cartoons portraying the clashing cultures and ideologies of the times, as well as the problems America was facing.</p>
+    
+    <p>The player moves in real life to create a more involved, immersive experience. The political cartoons are historically relevant portrayals of exagerated conversations people might have been having
+    and exist to show the contrasts of the time frame.</p>
+    
+    <p>Credits: Peter did the game, David did the cartoons</p>
+    
 <script>
 setInterval(onTimerTick, 2000);
 const devMode = 0;
     
 let dx, dy, viewX, viewY, oldViewX = 0, oldViewY = 0, c = document.getElementById("myCanvas"), ctx = c.getContext("2d"), grass = document.getElementById("grass"), water = document.getElementById("water"), blackMask = document.getElementById("blackMask"), whiteMask = document.getElementById("whiteMask");
-    
+var billstan = ["https://lh3.googleusercontent.com/-XKIBJobnqkA/Wo40JxA-W3I/AAAAAAAAHgU/-gnJSM1O8J0_R_S9jeazpraIs87GTCUeACL0BGAYYCw/h2476/2018-02-21.jpg",
+                "https://lh3.googleusercontent.com/-z2m2O7kcjWA/Wo40NKBpGMI/AAAAAAAAHgU/6S0pVArjuFIpfgVFxS1ygP1uNXQyffAJACL0BGAYYCw/h551/2018-02-21.png",
+                "https://lh3.googleusercontent.com/-hnPIKOMDqaU/Wo40uTb80RI/AAAAAAAABv8/FeGelcB8eFYZfN9vwoO_1Q6Y6IMNAn99QCL0BGAYYCw/h395/2018-02-21.jpg",
+                "https://lh3.googleusercontent.com/-ESxjgFVWd3Q/Wo40u7AW_tI/AAAAAAAABv8/ygANU3LbIAYmWnvUahqFDxB986G-_1VkQCL0BGAYYCw/h395/2018-02-21.jpg",
+                "https://lh3.googleusercontent.com/-7349xf_g1Fg/Wo40vQFj0HI/AAAAAAAABv8/HKI-cBxscD0a3fMLbRm3OPguL_qiAEdywCL0BGAYYCw/h395/2018-02-21.jpg",
+                "https://lh3.googleusercontent.com/-8_-FOZ6VuIY/Wo40v_cXeRI/AAAAAAAABv8/hbtITSSdU_MheF3qahGfyjLtH0AThHYkwCL0BGAYYCw/h395/2018-02-21.jpg",
+                "https://lh3.googleusercontent.com/-ZS6IUJW7LQg/Wo40wTQKqFI/AAAAAAAABv8/blFQrP7S1fUOcq0VABN59okmn9bkfGPVQCL0BGAYYCw/h395/2018-02-21.jpg"]
 function onTimerTick() {
     
     if(devMode === 0){
@@ -64,7 +78,9 @@ function showPosition(position) {
     drawFrame();
    oldViewX = viewX;
    oldViewY = viewY;
-   } else { console.log("hey");
+   } else {
+       console.log("hey");
+       window.open(billstan[Math.floor(Math.random() * Math.floor(max))]);
    }
     
 }
