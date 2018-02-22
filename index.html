@@ -10,7 +10,7 @@
     
 <body>
 
-<img id="grass" src="https://lh3.googleusercontent.com/-A0LG209pEmw/Wo4bI0g24YI/AAAAAAAAHes/vxwtKrg5Wu4uk-H5zJF2TGoZlJBW_jCBQCL0BGAYYCw/h46/2018-02-21.png" width="22" height="23">
+<img id="grass" src="https://lh3.googleusercontent.com/-A0LG209pEmw/Wo4bI0g24YI/AAAAAAAAHes/vxwtKrg5Wu4uk-H5zJF2TGoZlJBW_jCBQCL0BGAYYCw/h46/2018-02-21.png" width="22" height="22">
 <img id="blank" src="https://lh3.googleusercontent.com/-KdARkbOh70Y/Wo4InWSwDoI/AAAAAAAAHeQ/zBJOonpYSFI3bM5zYdWhGJ9guxu9Na1pQCL0BGAYYCw/h22/2018-02-21.png" width="22" height="22">
 <img id="water" src="./index_files/Water.png" width="22" height="22">
 <img id="blackMask" src="./index_files/BlackMask.png" width="22" height="22">
@@ -118,7 +118,7 @@ function drawFrame() {
             let XRender = XPos + 240, YRender = 180 - YPos;
                                      
             if(Math.round(Math.random()) == 1){
-            ctx.drawImage(grass,XRender,(YRender-33));                   
+            ctx.drawImage(grass,XRender,YRender);                   
             } else {
             ctx.drawImage(blank,XRender,YRender);
             }
