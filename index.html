@@ -118,10 +118,13 @@ function drawFrame() {
             
             let XRender = XPos + 240, YRender = 180 - YPos;
                                      
-            if(Math.round(Math.random()) == 1){
+            if(Math.round(Math.random() * 2) == 1){
             ctx.drawImage(grass,XRender,YRender);                   
             } else {
+            if(Math.round(Math.random() * 1) == 1){
             ctx.drawImage(blank,XRender,YRender);
+            } else {
+            ctx.drawImage(house1,XRender,YRender); 
             }
             
         
